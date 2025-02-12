@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Markdown to Plain Text Converter</title>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script>
+    // Function to convert Markdown to plain text
+    function convertMarkdown() {
+      const markdownInput = document.getElementById('markdown-input').value;
+      // Use the marked library to parse the markdown and strip HTML tags
+      const plainText = marked.parse(markdownInput);
+      // Clean up the HTML to plain text
+      const textOutput = plainText.replace(/<[^>]+>/g, '').trim();
+      document.getElementById('output').innerText = textOutput;
+    }
+
+    // Function to copy converted text to clipboard
+    function copyToClipboard() {
+      const outputText = document.getElementById('output').innerText;
+      navigator.clipboard.writeText(outputText).then(() => {
+        alert('Text copied to clipboard!');
+      });
+    }
+  </script>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 font-sans text-gray-900">
+  <div class="max-w-4xl mx-auto p-8 bg-white shadow-lg rounded-xl space-y-8">
+    <!-- Page Title -->
+    <h1 class="text-4xl font-semibold text-center text-gray-800">Markdown to Plain Text Converter</h1>
+
+    <!-- Markdown Input Section -->
+    <div class="bg-gray-100 p-6 rounded-lg shadow-sm space-y-4">
+      <h2 class="text-2xl font-medium text-gray-700">Enter Your Markdown</h2>
+      <textarea id="markdown-input" rows="8" class="w-full p-4 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" placeholder="Write your markdown content here..."></textarea>
+    </div>
+
+    <!-- Convert Button -->
+    <div class="flex justify-center">
+      <button onclick="convertMarkdown()" class="px-6 py-3 bg-blue-600 text-white rounded-full shadow-md hover:bg-blue-700 transition duration-300">
+        Convert
+      </button>
+    </div>
+
+    <!-- Converted Plain Text Output Section -->
+    <div class="bg-gray-100 p-6 rounded-lg shadow-sm space-y-4">
+      <h2 class="text-2xl font-medium text-gray-700">Converted Plain Text</h2>
+      <p id="output" class="border-2 border-gray-300 rounded-lg p-4 bg-white text-gray-800 whitespace-pre-wrap min-h-[150px]"></p>
+    </div>
+
+    <!-- Copy to Clipboard Button -->
+    <div class="flex justify-center">
+      <button onclick="copyToClipboard()" class="px-6 py-3 bg-green-600 text-white rounded-full shadow-md hover:bg-green-700 transition duration-300">
+        Copy to Clipboard
+      </button>
+    </div>
+
+    <!-- Sponsorship Section -->
+    <div class="bg-gray-100 p-6 rounded-lg shadow-sm mt-8 text-center">
+      <h3 class="text-xl font-semibold text-gray-700 mb-2">Sponsored by</h3>
+      <p class="text-lg text-gray-600">Looking for a reliable <a href="https://fabform.io" class="text-blue-600 hover:underline" target="_blank" rel="noopener noreferrer">form backend</a>? Check out FabForm.io!</p>
+    </div>
+  </div>
+</body>
+</html>
+
